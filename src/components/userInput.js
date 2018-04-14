@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cityObject from '../cities';
 
 export default class UserInput extends Component {
   constructor() {
