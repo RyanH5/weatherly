@@ -1,0 +1,11 @@
+.seven-hour-card {
+  border: solid 2px white;
+  width: 200px;
+  display: inline-block;
+}
+
+.ten-day-card {
+  border: solid 2px white;
+  width: 200px;
+  display: inline-block;
+}

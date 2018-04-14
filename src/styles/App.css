@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300; }
+
+.App {
+  text-align: center;
+  background-image: url(./assets/clouds-background.jpg);
+  background-size: cover; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px; }
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white; }
+
+.App-title {
+  font-size: 1.5em; }
+
+.App-intro {
+  font-size: large; }
+
+.top-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px; }
+
+/* =====================================
+      CurrentWeather Styles
+====================================== */
+.current-weather {
+  background: rgba(0, 0, 0, 0.5);
+  border: solid 1px white;
+  border-radius: 30px;
+  width: 35%;
+  display: inline-block;
+  height: 60vh;
+  color: white;
+  position: relative; }
+
+.current-location {
+  font-size: 40px;
+  margin-top: 15px; }
+
+.current-condition {
+  font-size: 20px;
+  margin-bottom: 15px; }
+
+.todays-temp {
+  font-size: 120px;
+  margin: 40px 0; }
+
+.todays-high {
+  font-size: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 50px; }
+
+.todays-low {
+  font-size: 50px;
+  position: absolute;
+  bottom: 20px;
+  right: 50px; }
+
+/* =====================================
+      SevenHourForecast Styles
+====================================== */
+.seven-hour-forecast {
+  background: rgba(0, 0, 0, 0.5);
+  border: solid 1px white;
+  border-radius: 30px;
+  width: 55%;
+  display: inline-block;
+  height: 60vh; }
+
+/* =====================================
+      TenDayForecast Styles
+====================================== */
+.ten-day-forecast {
+  background: pink;
+  height: 40vh; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

@@ -1,0 +1,24 @@
+.seven-hour-forecast {
+  background: rgba(0, 0, 0, 0.4);
+  border: solid 1px white;
+  border-radius: 30px;
+  width: 55%;
+  height: 60vh; 
+  color: white;
+}
+
+.seven-hour-header {
+  text-align: center;
+  font-size: 44px;
+  margin-bottom: 80px;
+}
+
+.hourly-condition {
+  font-size: 20px;
+}
+
+.hourly-card-container {
+  overflow: scroll;
+  white-space: nowrap;
+}
+
