@@ -1,17 +1,5 @@
-import Data from './components/weatherData';
+// import Data from './components/weatherData';
 import apiKey from './api-key';
-
-
-// componentDidMount() {
-//   fetch(`http://api.wunderground.com/api/${apiKey}/conditions/q/CO/Denver.json`)
-//   .then((response) => {
-//     response.json()
-//     .then((data) => {
-//       console.log(data);
-//       return data;
-//     })
-//   }).catch((error) => console.log('Error', error))
-// }
 
 const currentWeatherCleaner = (Data) => {
   const currentWeatherObj = {
@@ -55,11 +43,15 @@ const tenDayCleaner = (Data) => {
   return dayArr
 }
 
-const cleanedData = {
+
+const cleanedData = (Data) => {
+  const myData = {
   currentWeather: currentWeatherCleaner(Data),
   sevenHourWeather: sevenHourCleaner(Data),
   tenDayWeather: tenDayCleaner(Data),
+  }
+  return myData;
 }
 
 
-export default cleanedData
+export default cleanedData;

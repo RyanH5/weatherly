@@ -11,14 +11,18 @@ export default class TenDayForecast extends Component {
   }
 
   render() {
+    const {weather, isLoading} = this.props
+    if (isLoading) {
+      return <p>Loading... </p>;
+    }
+
     return (
       <div className='ten-day-forecast'>
         <h1 className='ten-day-header'>Ten Day Forecast</h1>
         <div className='ten-day-card-container'>
-          {this.create_cards(cleanedData.tenDayWeather)}
+          {this.create_cards(weather.tenDayWeather)}
         </div>
       </div>
     )
   }
 }
-
