@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import cityObject from '../cities';
+// import cityObject from '../cities';
 
 export default class UserInput extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      // location: 'userInput'
+      inputCity: '',
     }
+
+    this.updateLocation = this.updateLocation.bind(this)
+  }
+
+  updateLocation(event) {
+    console.log(event)
+    this.setState({inputCity: event.target.value})
   }
 
   render() {
@@ -16,10 +23,13 @@ export default class UserInput extends Component {
           type="text"
           className="user-input-field"
           aria-label="Input location by city or zipcode"
+          value={this.state.inputCity}
+          onChange={this.updateLocation}
         />
         <button 
           type="submit"
           className="submit-button"
+          onClick = {() => this.props.setCity(this.state.inputCity)}
         >
         Submit
         </button>

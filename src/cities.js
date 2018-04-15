@@ -22,7 +22,7 @@ const garbageData = {
     "Memphis, TN",
     "Seattle, WA",
     "Denver, CO",
-    "Washington, undefined",
+    "Washington, DC",
     "Boston, MA",
     "Nashville, TN",
     "Baltimore, MD",
@@ -1004,6 +1004,7 @@ const garbageData = {
 }
 
 const cityObject = garbageData.data.reduce((acc, citystate) => {
+  let city, state;
   [city,state] = citystate.split(', ');
   acc[city] = state
   return acc;
