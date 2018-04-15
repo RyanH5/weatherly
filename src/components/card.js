@@ -5,6 +5,11 @@ import '../styles/card.css';
 
 
 let Card = (props) => {
+  let newHour = props.hour;
+  if(props.hour > 12) {
+    newHour -= 12;
+  }
+
   if(props.day) {
     return(
       <div className="ten-day-card">
@@ -17,7 +22,7 @@ let Card = (props) => {
   } else {
     return (
       <div className="seven-hour-card">
-        <h1>{props.hour}</h1>
+        <h1>{newHour}</h1>
         <h1 className="hourly-condition">{props.hourlyCondition}</h1>
         <img src={props.hourlyIcon} />
         <h1>{props.hourlyTemp}</h1>
