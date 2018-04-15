@@ -1,3 +1,5 @@
+import { inputCleaner } from './inputCleaner'
+
 const garbageData = {
   "data": [
     "New York, NY",
@@ -1006,6 +1008,7 @@ const garbageData = {
 const cityObject = garbageData.data.reduce((acc, citystate) => {
   let city, state;
   [city,state] = citystate.split(', ');
+  city = inputCleaner(city)
   acc[city] = state
   return acc;
 }, {})

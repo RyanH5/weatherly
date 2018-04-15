@@ -20,6 +20,7 @@ export default class CurrentWeather extends Component {
         <h1 className="current-temp">{weather.currentWeather.temperature}°</h1>
         <h1 className="current-high">{weather.currentWeather.high}</h1>
         <h1 className="current-low">{weather.currentWeather.low}</h1>
+        <h1 className="current-description">{weather.currentWeather.description}</h1>
       </div>
     )
   }

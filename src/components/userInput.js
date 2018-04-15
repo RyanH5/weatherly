@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inputCleaner } from '../inputCleaner'
 // import cityObject from '../cities';
 
 export default class UserInput extends Component {
@@ -12,7 +13,6 @@ export default class UserInput extends Component {
   }
 
   updateLocation(event) {
-    console.log(event)
     this.setState({inputCity: event.target.value})
   }
 
