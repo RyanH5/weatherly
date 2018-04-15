@@ -7,6 +7,7 @@ import UserInput from './components/userInput';
 import cleanedData from './DataCleaner';
 import apiKey from './api-key';
 import cityObject from './cities';
+import { inputCleaner } from './inputCleaner'
 
 
 class App extends Component {
@@ -22,16 +23,6 @@ class App extends Component {
     this.fetchFunction = this.fetchFunction.bind(this)
   }
 
-  // componentDidMount() {
-  //   fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/CA/${this.state.currentCity}.json`)
-  //   .then((response) => {
-  //     return response.json()
-  //     .then((data) => {
-  //       this.setState({weather: cleanedData(data), isLoading: false});
-  //     })
-  //   }).catch((error) => console.log('Error', error))
-  // }
-
   setCity(city) {
     this.setState({ currentCity: city }, () => {
         this.fetchFunction()
@@ -39,18 +30,15 @@ class App extends Component {
   }
 
   fetchFunction() {
-    let city = this.state.currentCity;
-    let unitedState = cityObject[this.state.currentCity];
+    let city = inputCleaner(this.state.currentCity);
+    let unitedState = cityObject[city];
 
-    if (this.state.currentCity.includes(' ')) {
-      city = this.state.currentCity.split(' ').join('_');
-    }
-    
     fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${unitedState}/${city}.json`)
       .then((response) => {
         return response.json()
           .then((data) => {
             this.setState({ weather: cleanedData(data), isLoading: false });
+            console.log(data)
           })
       }).catch((error) => console.log('Error', error))
   }

@@ -8,9 +8,10 @@ const currentWeatherCleaner = (Data) => {
     zipCode: Data.current_observation.display_location.zip,
     condition: Data.current_observation.weather,
     temperature: Data.current_observation.temp_f,
-    high: Data.forecast.txt_forecast.forecastday[0].fcttext.split('. ')[1].split(' ')[1],
-    low: Data.forecast.txt_forecast.forecastday[1].fcttext.split('. ')[1].split(' ')[1],
+    high: Data.forecast.simpleforecast.forecastday[0].high.fahrenheit,
+    low: Data.forecast.simpleforecast.forecastday[0].low.fahrenheit,
     weatherIcon: Data.current_observation.icon_url,
+    description: Data.forecast.txt_forecast.forecastday[0].fcttext
   }
   return currentWeatherObj;
 }
@@ -21,7 +22,7 @@ const sevenHourCleaner = (Data) => {
     hour: hour.FCTTIME.hour,
     hourlyCondition: hour.condition,
     hourlyIcon: hour.icon_url,
-    hourlyTemp: hour.temp.english + 'F',
+      hourlyTemp: hour.temp.english + '°',
     timestamp: hour.FCTTIME.epoch
     }
     return hourObj;
@@ -46,9 +47,9 @@ const tenDayCleaner = (Data) => {
 
 const cleanedData = (Data) => {
   const myData = {
-  currentWeather: currentWeatherCleaner(Data),
-  sevenHourWeather: sevenHourCleaner(Data),
-  tenDayWeather: tenDayCleaner(Data),
+    currentWeather: currentWeatherCleaner(Data),
+    sevenHourWeather: sevenHourCleaner(Data),
+    tenDayWeather: tenDayCleaner(Data),
   }
   return myData;
 }
