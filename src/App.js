@@ -30,10 +30,16 @@ class App extends Component {
   }
 
   fetchFunction() {
-    let city = inputCleaner(this.state.currentCity);
-    let unitedState = cityObject[city];
+    let location;
+    if(typeof(this.state.currentCity) === 'number') {
+      location = this.state.currentCity;
+    } else {
+      let city = inputCleaner(this.state.currentCity);
+      let unitedState = cityObject[city];
+      location = `${unitedState}/${city}`
+    }
 
-    fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${unitedState}/${city}.json`)
+    fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${location}.json`)
       .then((response) => {
         return response.json()
           .then((data) => {
