@@ -58,9 +58,9 @@ class App extends Component {
   displayApp() {
     return (
       <div className="App">
-        <div className="top-container">
-          <h1>{this.state.showError && <div className="error-message">Please Enter a Valid City or Zipcode</div>}</h1>
-          <UserInput {...this.state} setCity={this.setCity}/>
+        <h1>{this.state.showError && <div className="error-message">Please Enter a Valid City or Zipcode</div>}</h1>
+        <UserInput {...this.state} setCity={this.setCity}/>
+        <div className="top-container">          
           <CurrentWeather {...this.state} />
           <SevenHourForecast {...this.state} />
         </div>
