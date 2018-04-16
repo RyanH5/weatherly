@@ -3,7 +3,6 @@ import cleanedData from '../DataCleaner';
 import '../styles/card.css';
 
 
-
 let Card = (props) => {
   let newHour = props.hour;
   if(props.hour > 12) {
