@@ -17,15 +17,15 @@ let Card = (props) => {
         <img src={props.icon}
           className="ten-day-icon"/>
         <div className="ten-day-high-low-wrap">
-          <h1 className="ten-day-high">{props.high}</h1>
-          <h1 className="ten-day-low">{props.low}</h1>
+          <h1 className="ten-day-high">{props.high}°</h1>
+          <h1 className="ten-day-low">{props.low}°</h1>
         </div>
       </div>
     )
   } else {
     return (
       <div className="seven-hour-card">
-        <h1>{newHour}</h1>
+        <h1>{newHour}:00</h1>
         <h1 className="hourly-condition">{props.hourlyCondition}</h1>
         <img src={props.hourlyIcon} />
         <h1>{props.hourlyTemp}</h1>
