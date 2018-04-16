@@ -16,17 +16,23 @@ class App extends Component {
     this.state = {
       weather: null,
       isLoading: true,
-      currentCity: null
+      currentCity: null,
+      showError: false
     }
 
     this.setCity = this.setCity.bind(this)
     this.fetchFunction = this.fetchFunction.bind(this)
+    this.toggleError = this.toggleError.bind(this)
   }
 
   setCity(city) {
     this.setState({ currentCity: city }, () => {
         this.fetchFunction()
     })
+  }
+
+  toggleError() {
+    this.setState({showError: true});
   }
 
   fetchFunction() {
@@ -43,16 +49,22 @@ class App extends Component {
       .then((response) => {
         return response.json()
           .then((data) => {
-            this.setState({ weather: cleanedData(data), isLoading: false });
+            this.setState({ weather: cleanedData(data), isLoading: false,
+              showError: false 
+            });
             console.log(data)
           })
-      }).catch((error) => console.log('Error', error))
-  }
+      }).catch((error) => {
+        this.toggleError();
+        console.log('Error', error);
+        })
+    }
 
   displayApp() {
     return (
       <div className="App">
         <div className="top-container">
+          <h1>{this.state.showError && <div className="error-message">Please Enter a Valid City or Zipcode</div>}</h1>
           <UserInput {...this.state} setCity={this.setCity}/>
           <CurrentWeather {...this.state} />
           <SevenHourForecast {...this.state} />
@@ -64,7 +76,10 @@ class App extends Component {
 
   displaySplash() {
     return(
-      <UserInput {...this.state} setCity={this.setCity}/>
+      <div>
+        <UserInput {...this.state} setCity={this.setCity}/>
+        <h1>{this.state.showError && <div className="error-message">Please Enter a Valid City or Zipcode</div>}</h1>
+      </div>
     )
   }
 
@@ -72,7 +87,7 @@ class App extends Component {
     return (
       <div className="App">
         {
-          this.state.currentCity ? 
+          this.state.currentCity && !this.state.showError ? 
           this.displayApp() :
           this.displaySplash() 
         }
