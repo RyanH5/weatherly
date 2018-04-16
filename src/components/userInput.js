@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { inputCleaner } from '../inputCleaner'
+import { inputCleaner } from '../inputCleaner';
+import '../styles/userInput.css'
 // import cityObject from '../cities';
 
 export default class UserInput extends Component {
@@ -31,7 +32,7 @@ export default class UserInput extends Component {
           className="submit-button"
           onClick = {() => this.props.setCity(this.state.inputCity)}
         >
-        Submit
+        ▶︎
         </button>
       </div>
     )

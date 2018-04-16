@@ -8,8 +8,8 @@ let Card = (props) => {
   let newHour = props.hour;
   if(props.hour > 12) {
     newHour -= 12;
-  }
-
+  } 
+  
   if(props.day) {
     return(
       <div className="ten-day-card">
