@@ -26,6 +26,7 @@ export default class UserInput extends Component {
           aria-label="Input location by city or zipcode"
           value={this.state.inputCity}
           onChange={this.updateLocation}
+          placeHolder="Enter a city or zip"
         />
         <button 
           type="submit"
