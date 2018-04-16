@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+.user-input-field{
+  font-size: 25px;
+  width: 350px;
+  border: 1px solid white;
+   -webkit-box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+           0 0 16px rgba(0,0,0,0.1);
+   -moz-box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+           0 0 16px rgba(0,0,0,0.1);
+   box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0.1),
+           0 0 16px rgba(0,0,0,0.1);
+   padding: 10px;
+   background: rgba(255,255,255,0.2);
+   margin: 0 0 10px 0;
+   color: rgb(97, 97, 97);
+   margin-top: 10px;
+}
+
+.submit-button {
+  width: 40px;
+  font-size: 20px;
+  border: none;
+  background: none;
+  font-size: 35px;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  vertical-align: middle;
+}

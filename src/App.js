@@ -71,7 +71,8 @@ class App extends Component {
 
   displaySplash() {
     return(
-      <div>
+      <div className="splash-page">
+        <h1>W E A T H E R L Y</h1>
         <UserInput {...this.state} setCity={this.setCity}/>
         <h1>{this.state.showError && <div className="error-message">Please Enter a Valid City or Zipcode</div>}</h1>
       </div>
