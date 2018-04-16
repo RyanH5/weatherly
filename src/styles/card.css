@@ -1,11 +1,40 @@
 .seven-hour-card {
-  border: solid 2px white;
-  width: 200px;
+  border-left: solid 2px white;
+  border-right: solid 2px white;
+  width: 180px;
   display: inline-block;
 }
 
+.seven-hour-card:hover {
+   background: rgba(20, 40, 67, 0.8);
+}
+
 .ten-day-card {
-  border: solid 2px white;
-  width: 200px;
+  border-left: solid 2px white;
+  border-right: solid 2px white;
+  width: 180px;
   display: inline-block;
+}
+
+.ten-day-card:hover {
+   background: rgba(20, 40, 67, 0.8);
+}
+
+.ten-day-icon {
+  display: block;
+  margin: 10px auto;
+}
+
+.ten-day-high-low-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.ten-day-low {
+  color: rgba(255, 255, 255, 0.521) 
+}
+
+.seven-hour-low {
+  color: rgba(255, 255, 255, 0.521) 
 }

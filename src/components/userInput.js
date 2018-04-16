@@ -17,6 +17,10 @@ export default class UserInput extends Component {
     this.setState({inputCity: event.target.value})
   }
 
+  submitBtnUnfocus() {
+    document.querySelector('.submit-button').blur();
+  }
+
   render() {
     return (
       <div>
@@ -31,7 +35,11 @@ export default class UserInput extends Component {
         <button 
           type="submit"
           className="submit-button"
-          onClick = {() => this.props.setCity(this.state.inputCity)}
+          onClick = {() => {
+            this.props.setCity(this.state.inputCity)
+            this.submitBtnUnfocus();
+            }
+          }
         >
         ▶︎
         </button>
