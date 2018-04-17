@@ -44,18 +44,14 @@ class App extends Component {
       let storedLocation = JSON.parse(localStorage.getItem(1));
 
       fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${storedLocation}.json`)
-        .then((response) => {
-          return response.json()
-            .then((data) => {
-              this.setState({
-                currentCity: storedLocation,
-                weather: cleanedData(data), isLoading: false,
-                showError: false
-              });
-            });
-        }).catch(() => {
-          this.toggleError();
-        });
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState({
+            currentCity: storedLocation,
+            weather: cleanedData(data), isLoading: false,
+            showError: false
+          });
+        }).catch(() => this.toggleError());
     }
   }
 
@@ -63,7 +59,6 @@ class App extends Component {
     let city = inputCleaner(this.state.currentCity);
     let unitedState = cityObject[city];
     let location = `${unitedState}/${city}`;
-
     
     localStorage.setItem(1, JSON.stringify(location));
  

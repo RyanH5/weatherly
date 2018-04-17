@@ -4,18 +4,23 @@ import App from '../App';
 import { shallow , mount } from 'enzyme';
 import { inputCleaner } from '../inputCleaner';
 
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-
 describe('App tests', () => {
   let renderedApp;
 
+  window.localStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn()
+  };
+
   beforeEach(() => {
     renderedApp = shallow(<App />);
+  });
+
+  it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
   });
 
   it('should exist', () => {
@@ -78,12 +83,6 @@ describe('App tests', () => {
     renderedApp.instance().render();
     expect(renderedApp.instance().displaySplash).toHaveBeenCalled();
   });
-
-  it('should call the inputCleaner method when fetchFunction is invoked', () => {
-    renderedApp.instance().fetchFunction = jest.fn();
-    renderedApp.instance().fetchFunction();
-    expect(renderedApp.instance().fetchFunction).toHaveBeenCalled();
-  })
 
   it('should call the inputCleaner method when fetchFunction is invoked', () => {
     renderedApp.instance().fetchFunction = jest.fn();
