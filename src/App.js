@@ -39,11 +39,9 @@ class App extends Component {
     this.checkLocalStorage();
   }
 
-  checkLocalStorage() {
-    if(localStorage.length) {
-      let storedLocation = JSON.parse(localStorage.getItem(1));
-
-      fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${storedLocation}.json`)
+  retrieveData() {
+    let storedLocation = JSON.parse(localStorage.getItem(1));
+    fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${storedLocation}.json`)
         .then((response) => response.json())
         .then((data) => {
           this.setState({
@@ -52,6 +50,12 @@ class App extends Component {
             showError: false
           });
         }).catch(() => this.toggleError());
+  }
+
+  checkLocalStorage() {
+    if(localStorage.currentLocation) {
+      let storedLocation = JSON.parse(localStorage.getItem(1));
+      this.retrieveData();      
     }
   }
 
@@ -60,19 +64,9 @@ class App extends Component {
     let unitedState = cityObject[city];
     let location = `${unitedState}/${city}`;
     
-    localStorage.setItem(1, JSON.stringify(location));
+    localStorage.setItem('currentLocation', JSON.stringify(location));
  
-    fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${location}.json`)
-      .then((response) => {
-        return response.json()
-          .then((data) => {
-            this.setState({ weather: cleanedData(data), isLoading: false,
-              showError: false 
-            });
-          });
-      }).catch((error) => {
-        this.toggleError();
-      });
+   this.retrieveData();
   }
 
   displayApp() {
