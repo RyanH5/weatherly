@@ -1,4 +1,4 @@
-import { inputCleaner } from './inputCleaner'
+import { inputCleaner } from './inputCleaner';
 
 const garbageData = {
   "data": [
@@ -1003,14 +1003,14 @@ const garbageData = {
     "Beloit, WI",
     "Panama City, FL"
   ]
-}
+};
 
 const cityObject = garbageData.data.reduce((acc, citystate) => {
   let city, state;
   [city,state] = citystate.split(', ');
-  city = inputCleaner(city)
-  acc[city] = state
+  city = inputCleaner(city);
+  acc[city] = state;
   return acc;
-}, {})
+}, {});
 
 export default cityObject;
