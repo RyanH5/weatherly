@@ -9,7 +9,6 @@ import apiKey from './api-key';
 import cityObject from './cities';
 import { inputCleaner } from './inputCleaner'
 
-
 class App extends Component {
   constructor(data) {
     super();
@@ -23,6 +22,7 @@ class App extends Component {
     this.setCity = this.setCity.bind(this)
     this.fetchFunction = this.fetchFunction.bind(this)
     this.toggleError = this.toggleError.bind(this)
+    this.checkLocalStorage = this.checkLocalStorage.bind(this)
   }
 
   setCity(city) {
@@ -35,10 +35,45 @@ class App extends Component {
     this.setState({showError: true});
   }
 
+  componentDidMount() {
+    this.checkLocalStorage();
+    console.log('componentdidmount', this.state)
+    this.displayApp();
+  }
+
+  checkLocalStorage() {
+    if(localStorage.length) {
+
+      let storedLocation = JSON.parse(localStorage.getItem(1))
+
+      console.log(storedLocation)
+
+      fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${storedLocation}.json`)
+        .then((response) => {
+          return response.json()
+            .then((data) => {
+              console.log('waaaa')
+              this.setState({
+                currentCity: storedLocation,
+                weather: cleanedData(data), isLoading: false,
+                showError: false
+              });
+              console.log(this.state)
+            })
+        }).catch((error) => {
+          this.toggleError();
+          console.log('Error', error);
+        })
+    }
+  }
+
   fetchFunction() {
     let city = inputCleaner(this.state.currentCity);
     let unitedState = cityObject[city];
     let location = `${unitedState}/${city}`;
+
+    
+    localStorage.setItem(1, JSON.stringify(location))
  
     fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${location}.json`)
       .then((response) => {
