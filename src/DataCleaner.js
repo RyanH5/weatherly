@@ -12,23 +12,23 @@ const currentWeatherCleaner = (Data) => {
     low: Data.forecast.simpleforecast.forecastday[0].low.fahrenheit,
     weatherIcon: Data.current_observation.icon_url,
     description: Data.forecast.txt_forecast.forecastday[0].fcttext
-  }
+  };
   return currentWeatherObj;
-}
+};
 
 const sevenHourCleaner = (Data) => {
   const hourArr = Data.hourly_forecast.map((hour) => {
     let hourObj = {
-    hour: hour.FCTTIME.hour,
-    hourlyCondition: hour.condition,
-    hourlyIcon: hour.icon_url,
+      hour: hour.FCTTIME.hour,
+      hourlyCondition: hour.condition,
+      hourlyIcon: hour.icon_url,
       hourlyTemp: hour.temp.english + '°',
-    timestamp: hour.FCTTIME.epoch
-    }
+      timestamp: hour.FCTTIME.epoch
+    };
     return hourObj;
-  }).slice(0, 7)
+  }).slice(0, 7);
   return hourArr;
-}
+};
 
 const tenDayCleaner = (Data) => {
   const dayArr = Data.forecast.simpleforecast.forecastday.map((day) => {
@@ -38,11 +38,11 @@ const tenDayCleaner = (Data) => {
       low: day.low.fahrenheit,
       icon: day.icon_url,
       timestamp: day.date.epoch
-    }
+    };
     return dayObj;
-  })
-  return dayArr
-}
+  });
+  return dayArr;
+};
 
 
 const cleanedData = (Data) => {
@@ -50,9 +50,9 @@ const cleanedData = (Data) => {
     currentWeather: currentWeatherCleaner(Data),
     sevenHourWeather: sevenHourCleaner(Data),
     tenDayWeather: tenDayCleaner(Data),
-  }
+  };
   return myData;
-}
+};
 
 
 export default cleanedData;
