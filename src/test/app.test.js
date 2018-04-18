@@ -10,7 +10,8 @@ describe('App tests', () => {
   window.localStorage = {
     getItem: jest.fn(),
     setItem: jest.fn(),
-    removeItem: jest.fn()
+    removeItem: jest.fn(),
+    clear: jest.fn()
   };
 
   beforeEach(() => {
@@ -33,6 +34,7 @@ describe('App tests', () => {
         weather: null,
         isLoading: true,
         currentCity: null,
+        currentState: null,
         showError: false
       };
     
@@ -42,12 +44,6 @@ describe('App tests', () => {
   it('should toggle showError state from default of false to true after running toggleError', () => {
     renderedApp.instance().toggleError();
     expect(renderedApp.state('showError')).toBe(true)
-  });
-
-  it('should update the currentCity state property to the passed in city', () => {
-    renderedApp.instance().fetchFunction = jest.fn();
-    renderedApp.instance().setCity('Atlanta');
-    expect(renderedApp.state('currentCity')).toBe('Atlanta')
   });
 
   it('should run the displayApp method when there is a state of current city and there is not a showError state', () => {
