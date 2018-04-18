@@ -6,7 +6,7 @@ import './styles/App.css';
 import UserInput from './components/userInput';
 import cleanedData from './DataCleaner';
 import apiKey from './api-key';
-import cityObject from './cities';
+import { cityObject }  from './cities';
 import { inputCleaner } from './inputCleaner';
 
 class App extends Component {
@@ -16,19 +16,33 @@ class App extends Component {
       weather: null,
       isLoading: true,
       currentCity: null,
+      currentState: null,
       showError: false
     };
 
     this.setCity = this.setCity.bind(this);
-    this.fetchFunction = this.fetchFunction.bind(this);
     this.toggleError = this.toggleError.bind(this);
     this.checkLocalStorage = this.checkLocalStorage.bind(this);
   }
 
-  setCity(city) {
-    this.setState({ currentCity: city }, () => {
-      this.fetchFunction();
-    });
+  setCity(location) {
+    const city = location.split(', ')[0];
+    const unitedState = location.split(', ')[1];
+    fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${unitedState}/${city}.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        this.saveLocation(location)
+        this.setState({
+          currentCity: city,
+          currentState: unitedState,
+          weather: cleanedData(data), 
+          isLoading: false,
+          showError: false
+        });
+      }).catch(() => {
+        localStorage.clear()
+        this.toggleError()
+      })
   }
 
   toggleError() {
@@ -40,7 +54,7 @@ class App extends Component {
   }
 
   retrieveData() {
-    let storedLocation = JSON.parse(localStorage.getItem(1));
+    let storedLocation = JSON.parse(localStorage.getItem('currentLocation'));
     fetch(`http://api.wunderground.com/api/${apiKey}/conditions/hourly/forecast10day/q/${storedLocation}.json`)
         .then((response) => response.json())
         .then((data) => {
@@ -54,19 +68,13 @@ class App extends Component {
 
   checkLocalStorage() {
     if(localStorage.currentLocation) {
-      let storedLocation = JSON.parse(localStorage.getItem(1));
+      let storedLocation = JSON.parse(localStorage.getItem('currentLocation'));
       this.retrieveData();      
     }
   }
 
-  fetchFunction() {
-    let city = inputCleaner(this.state.currentCity);
-    let unitedState = cityObject[city];
-    let location = `${unitedState}/${city}`;
-    
-    localStorage.setItem('currentLocation', JSON.stringify(location));
- 
-   this.retrieveData();
+  saveLocation(location) { 
+    localStorage.setItem('currentLocation', JSON.stringify(location))
   }
 
   displayApp() {
