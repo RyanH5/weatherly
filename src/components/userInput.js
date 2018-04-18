@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { inputCleaner } from '../inputCleaner';
-import '../styles/userInput.css'
-// import cityObject from '../cities';
+import '../styles/userInput.css';
+import { Trie } from '@seamus-quinn/autocomplete'
+import { garbageData } from '../cities';
+
+const suggestions = new Trie();
+suggestions.populate(garbageData.data);
 
 export default class UserInput extends Component {
   constructor(props) {
     super();
     this.state = {
-      inputCity: '',
+      userLocation: '',
     }
 
     this.updateLocation = this.updateLocation.bind(this)
   }
 
   updateLocation(event) {
-    this.setState({inputCity: event.target.value})
+    this.setState({userLocation: event.target.value})
   }
 
   submitBtnUnfocus() {
@@ -22,21 +26,30 @@ export default class UserInput extends Component {
   }
 
   render() {
+    suggestions.suggest(this.state.userLocation)
+    let citySuggestions = null;
+    if(suggestions.suggestionArray) {
+      citySuggestions = suggestions.suggestionArray.map((suggestion, index) => (<option key={index}>{suggestion}</option>))
+    }
     return (
       <div>
         <input 
           type="text"
           className="user-input-field"
           aria-label="Input location by city or zipcode"
-          value={this.state.inputCity}
+          value={this.state.userLocation}
           onChange={this.updateLocation}
           placeholder="Enter a city or zip"
+          list="city"
         />
+        <datalist id="city">
+        {citySuggestions}
+        </datalist>
         <button 
           type="submit"
           className="submit-button"
           onClick = {() => {
-            this.props.setCity(this.state.inputCity)
+            this.props.setCity(this.state.userLocation)
             this.submitBtnUnfocus();
             }
           }

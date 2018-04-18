@@ -1013,4 +1013,7 @@ const cityObject = garbageData.data.reduce((acc, citystate) => {
   return acc;
 }, {});
 
-export default cityObject;
+export {
+  cityObject,
+  garbageData
+}
